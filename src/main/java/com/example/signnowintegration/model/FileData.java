@@ -11,9 +11,35 @@ public class FileData {
 	private String[] document_ids;
 	private String group_name;
 	
+	//For document group id
+	
+	  private String type;
+	  private String with_history;  
+	  private String[] document_order;
+	  
+	  
+	 
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getWith_history() {
+		return with_history;
+	}
+	public void setWith_history(String with_history) {
+		this.with_history = with_history;
+	}
+	public String[] getDocument_order() {
+		return document_order;
+	}
+	public void setDocument_order(String[] document_order) {
+		this.document_order = document_order;
+	}
 	
 	
-
+	
 	public String getGroup_name() {
 		return group_name;
 	}

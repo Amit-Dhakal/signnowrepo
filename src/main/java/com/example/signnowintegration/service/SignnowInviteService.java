@@ -22,4 +22,8 @@ public interface SignnowInviteService  {
 	public String downloadDocumentLink(String downloadURL,FileData filedata) throws IOException;
 	
 	
+	public String downloadGroupDocument(String downloadURL,FileData filedata) throws IOException;
+
+	
+	
 }

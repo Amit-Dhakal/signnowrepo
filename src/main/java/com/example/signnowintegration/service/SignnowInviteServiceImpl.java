@@ -226,8 +226,8 @@ public class SignnowInviteServiceImpl implements SignnowInviteService{
 			  .build();
         
 	    Response response = client.newCall(request).execute();
-        InputStream inputStream=response.body().byteStream();
-        		
+	    
+        InputStream inputStream=response.body().byteStream();        		
    // BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String filepath=filedata.getFilePath()+File.separator+filedata.getFileName();
         
@@ -283,13 +283,10 @@ BufferedReader reader = new BufferedReader(response.body().charStream());
 			int i2=jsonObj.toString().indexOf("}");		
 			System.out.println(i2);		
 			 responsejson=jsonObj.toString().substring(i1+7,i2-1);			
-		}
-		
-	String res=downloadUsingStream(responsejson,filedata);
-		
+		}	
+	   String res=downloadUsingStream(responsejson,filedata);	
 		System.out.println(responsejson);	
 		System.out.println(res);	
-
 		return responsejson;	
 						
 	}
@@ -314,6 +311,49 @@ BufferedReader reader = new BufferedReader(response.body().charStream());
 	        bis.close();
 			return "File downloaded to "+filepath;
 	    }
+
+
+
+	@Override
+	public String downloadGroupDocument(String downloadURL,FileData filedata) throws IOException {
+		// TODO Auto-generated method stub
+	
+		ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(filedata);
+                
+		OkHttpClient client = new OkHttpClient();
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(mediaType,json);
+				
+		
+		Request request = new Request.Builder()
+		  .url(downloadURL)
+		  .post(body)
+		  .addHeader("Content-Type", "application/json")
+		  .addHeader("Authorization","Bearer "+signnowService.getAccessToken(Constants.tokenUrl))	  
+		  .build();
+		Response response = client.newCall(request).execute();
+		 
+		 
+		  InputStream inputStream=response.body().byteStream();        		
+		   // BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+		        String filepath=filedata.getFilePath()+File.separator+filedata.getFileName();
+		        
+		        File targetFile = new File(filepath);
+
+		        OutputStream outStream = new FileOutputStream(targetFile);
+
+		        byte[] buffer = new byte[8 * 1024];
+		        int bytesRead;
+		        while ((bytesRead = inputStream.read(buffer)) != -1) {
+		            outStream.write(buffer, 0, bytesRead);
+		        }
+		        IOUtils.closeQuietly(inputStream);
+		        IOUtils.closeQuietly(outStream);
+		    		 
+			return "File Downloaded To :-"+filepath;
+			
+	}
 	
 	
 	 

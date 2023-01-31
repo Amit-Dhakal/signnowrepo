@@ -155,6 +155,27 @@ public class SignnowController {
 	}
 	
 	
+	@RequestMapping(value = "/downloadgroup/{document_group_id}",method=RequestMethod.POST,produces =org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> downloadDocumentGroup(@PathVariable String document_group_id,@RequestBody FileData filedata) throws IOException{	
+				
+		System.out.println(document_group_id);
+		
+		 String token=signnowService.getAccessToken(Constants.tokenUrl); 
+		 
+	    String downloadURL="https://api-eval.signnow.com/documentgroup/"+document_group_id+"/"+"downloadall"; 	   
+	    System.out.println(downloadURL);
+	    
+	    
+		String resp=signnowInviteService.downloadGroupDocument(downloadURL,filedata);	
+		return new ResponseEntity<>("Response of API :"+resp,HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }
   
