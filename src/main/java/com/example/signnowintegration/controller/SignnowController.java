@@ -22,6 +22,8 @@ import com.example.signnowintegration.service.SignnowInviteService;
 import com.example.signnowintegration.service.SignnowInviteServiceImpl;
 import com.example.signnowintegration.service.SignnowService;
 
+import okhttp3.Response;
+
 @RestController
 @RequestMapping("/signnow")
 public class SignnowController {
@@ -172,6 +174,21 @@ public class SignnowController {
 	
 	
 	
+	
+	@RequestMapping(value = "/documentinfo/{document_id}",method=RequestMethod.GET,produces =org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getDocumentInfo(@PathVariable String document_id) throws IOException{	
+				
+		
+		 String token=signnowService.getAccessToken(Constants.tokenUrl); 
+		 
+	    String documentURL="https://api-eval.signnow.com/document/"+document_id; 	   
+	    
+	    String resp=signnowInviteService.getDocumentInfo(documentURL);	
+		
+		return new ResponseEntity<>("Response of API :"+resp,HttpStatus.OK);
+		
+		
+	}
 	
 	
 	

@@ -354,6 +354,38 @@ BufferedReader reader = new BufferedReader(response.body().charStream());
 			return "File Downloaded To :-"+filepath;
 			
 	}
+
+
+
+	@Override
+	public String getDocumentInfo(String documentURL) throws IOException {
+		// TODO Auto-generated method stub
+		
+		OkHttpClient client = new OkHttpClient();
+
+		Request request = new Request.Builder()
+		  .url(documentURL)
+		  .get()
+		  .addHeader("Content-Type", "application/json")
+		  .addHeader("Authorization","Bearer "+signnowService.getAccessToken(Constants.tokenUrl))	  
+		  .build();
+
+		Response response = client.newCall(request).execute();
+		
+		
+BufferedReader reader = new BufferedReader(response.body().charStream());
+		
+		StringBuilder builder = new StringBuilder();	
+		for (String line = null; (line = reader.readLine()) != null;) {
+		    builder.append(line).append("\n");
+		}		
+		JSONTokener tokener = new JSONTokener(builder.toString());
+		JSONObject jsonObj = new JSONObject(tokener);	 
+		return jsonObj.toString();	
+		
+			
+		
+	}
 	
 	
 	 
