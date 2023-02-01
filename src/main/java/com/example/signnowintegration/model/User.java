@@ -4,6 +4,9 @@ public class User {
 	
 	private String from;
 	private String to;
+		
+	
+	
 	
 	public String getFrom() {
 		return from;

@@ -29,4 +29,7 @@ public interface SignnowInviteService  {
 	public String getDocumentInfo(String url) throws IOException;
 	
 	
+	public String fieldinvitePersonToSign(String inviteURL,FieldData fieldData) throws IOException;
+
+	
 }

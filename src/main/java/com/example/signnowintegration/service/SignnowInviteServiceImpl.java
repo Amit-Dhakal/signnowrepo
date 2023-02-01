@@ -99,6 +99,8 @@ public class SignnowInviteServiceImpl implements SignnowInviteService{
 		JSONTokener tokener = new JSONTokener(builder.toString());
 		JSONObject jsonObj = new JSONObject(tokener);	 
 		return jsonObj.toString();	
+		
+		
 	}
 
 
@@ -386,9 +388,44 @@ BufferedReader reader = new BufferedReader(response.body().charStream());
 			
 		
 	}
+
+
+
+	@Override
+	public String fieldinvitePersonToSign(String inviteURL,FieldData fieldData) throws IOException {
+		
+		ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(fieldData);
+        
+		OkHttpClient client = new OkHttpClient();
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(mediaType,json);
+				
 	
+		Request request = new Request.Builder()
+		  .url(inviteURL)
+		  .post(body)
+		  .addHeader("Content-Type", "application/json")
+		  .addHeader("Authorization","Bearer "+signnowService.getAccessToken(Constants.tokenUrl))
+		  .addHeader("Content-type", "application/json")
+		  .build();
+		Response response = client.newCall(request).execute();
+		
+		
+	BufferedReader reader = new BufferedReader(response.body().charStream());
+		
+		StringBuilder builder = new StringBuilder();	
+		for (String line = null; (line = reader.readLine()) != null;) {
+		    builder.append(line).append("\n");
+		}		
+		JSONTokener tokener = new JSONTokener(builder.toString());
+		JSONObject jsonObj = new JSONObject(tokener);	 
+		return jsonObj.toString();	
+		
+				
+	}
 	
-	 
+
 	 
 	 
 }

@@ -2,6 +2,85 @@ package com.example.signnowintegration.model;
 
 public class FieldData {
 	
+	
+	//Field Invite data 
+	
+	private String document_id;
+	private Object[] to;
+	private String from;
+	private Object[] cc;
+	private Object[] cc_step;
+	private Object[] viewers;
+
+	private String subject;
+	private String message;
+	private String cc_subject;
+	private String cc_message;
+	
+	
+	
+	
+	
+		public String getDocument_id() {
+		return document_id;
+	}
+	public void setDocument_id(String document_id) {
+		this.document_id = document_id;
+	}
+		public Object[] getTo() {
+		return to;
+	}
+	public void setTo(Object[] to) {
+		this.to = to;
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public Object[] getCc() {
+		return cc;
+	}
+	public void setCc(Object[] cc) {
+		this.cc = cc;
+	}
+	public Object[] getCc_step() {
+		return cc_step;
+	}
+	public void setCc_step(Object[] cc_step) {
+		this.cc_step = cc_step;
+	}
+	public Object[] getViewers() {
+		return viewers;
+	}
+	public void setViewers(Object[] viewers) {
+		this.viewers = viewers;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getCc_subject() {
+		return cc_subject;
+	}
+	public void setCc_subject(String cc_subject) {
+		this.cc_subject = cc_subject;
+	}
+	public String getCc_message() {
+		return cc_message;
+	}
+	public void setCc_message(String cc_message) {
+		this.cc_message = cc_message;
+	}
 		private Object[] fields;  
 		
 		/*

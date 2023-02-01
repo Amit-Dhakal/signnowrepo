@@ -193,6 +193,22 @@ public class SignnowController {
 	
 	
 	
+	@RequestMapping(value = "/fieldinvite/{document_id}",method = RequestMethod.POST,produces = org.springframework.http.MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> fieldinviteToSign(@PathVariable String document_id,@RequestBody FieldData fieldData) throws IOException{
+		 String token=signnowService.getAccessToken(Constants.tokenUrl);	
+		 System.out.println(document_id);
+
+	    String inviteURL="https://api-eval.signnow.com/document/"+document_id+"/"+"invite";              
+		String resp=signnowInviteService.fieldinvitePersonToSign(inviteURL,fieldData);	
+		
+		return new ResponseEntity<>("Response of API :"+resp,HttpStatus.OK);	
+		
+	}
+
+	
+	
+	
+	
 	
 }
   
